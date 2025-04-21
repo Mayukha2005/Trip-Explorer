@@ -3,25 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waygo Tourism</title>
+    <title>Waygo Tourism - Your Smart Travel Companion</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header Component -->
-    <div id="header"></div>
+    <header class="header-main">
+        <div class="header-container">
+            <div class="logo">
+                <h1><i class="fas fa-plane-departure"></i> Waygo Tourism</h1>
+            </div>
+            <nav class="main-nav">
+                <ul id="primary-navigation" class="nav-list">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="destinations.html"><i class="fas fa-map-marked-alt"></i> Destinations</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <!-- Search Form Component -->
-    <div id="search-form"></div>
+    <main class="main-content">
+        <section class="hero-section">
+            <h2>Plan Your Perfect Trip</h2>
+            <p>Let us help you discover amazing destinations within your budget</p>
+        </section>
 
-    <main>
-        <h1>Welcome to Waygo Tourism</h1>
-        <p>Discover your next travel destination based on your budget!</p>
-        <div id="results"></div>
+        <section class="search-section">
+            <form id="search-form" class="search-form">
+                <div class="form-group">
+                    <label for="destination">Where would you like to go?</label>
+                    <div class="input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="destination" name="destination" 
+                               placeholder="Enter destination" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget">What's your budget?</label>
+                    <div class="input-group">
+                        <i class="fas fa-wallet"></i>
+                        <input type="number" id="budget" name="budget" 
+                               placeholder="Enter amount" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Duration of stay</label>
+                    <div class="input-group">
+                        <i class="fas fa-calendar"></i>
+                        <select id="duration" name="duration" required>
+                            <option value="">Select duration</option>
+                            <option value="weekend">Weekend Gateway</option>
+                            <option value="week">1 Week</option>
+                            <option value="fortnight">2 Weeks</option>
+                            <option value="month">1 Month</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Generate Travel Plan
+                </button>
+            </form>
+        </section>
+
+        <section id="results" class="results-section">
+            <!-- Results will be dynamically populated -->
+        </section>
     </main>
 
-    <!-- Footer Component -->
-    <div id="footer"></div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Waygo</h3>
+                <p>Your trusted partner in creating unforgettable travel experiences.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://pinterest.com" target="_blank"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Waygo Tourism. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="main.js"></script>
     <script src="destinations.js"></script>

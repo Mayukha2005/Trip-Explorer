@@ -1,34 +1,85 @@
-function generateTravelPlan(destination, budget) {
-    // Sample data for demonstration purposes
-    const destinations = [
-        { name: "Paris", budgetRange: [1000, 3000], activities: ["Eiffel Tower", "Louvre Museum", "Seine River Cruise"] },
-        { name: "New York", budgetRange: [1500, 4000], activities: ["Statue of Liberty", "Central Park", "Broadway Show"] },
-        { name: "Tokyo", budgetRange: [1200, 3500], activities: ["Shibuya Crossing", "Tokyo Tower", "Sushi Making Class"] },
-        { name: "Sydney", budgetRange: [1300, 3200], activities: ["Sydney Opera House", "Bondi Beach", "Harbour Bridge Climb"] }
-    ];
-
-    const selectedDestination = destinations.find(dest => dest.name.toLowerCase() === destination.toLowerCase());
-
-    if (selectedDestination) {
-        if (budget >= selectedDestination.budgetRange[0] && budget <= selectedDestination.budgetRange[1]) {
-            return {
-                destination: selectedDestination.name,
-                activities: selectedDestination.activities
-            };
-        } else {
-            return {
-                error: "Budget is not sufficient for this destination."
-            };
-        }
-    } else {
-        return {
-            error: "Destination not found."
-        };
+async function generateTravelPlan(destination, budget, duration) {
+    // Validate inputs
+    if (!destination || !budget || !duration) {
+        throw new Error('Missing required parameters');
     }
+
+    // Get destination information
+    const destInfo = destinations.getDestinationInfo(destination);
+    if (!destInfo) {
+        throw new Error('Destination not found');
+    }
+
+    // Calculate daily budget
+    const durationDays = getDurationInDays(duration);
+    const dailyBudget = budget / durationDays;
+
+    // Generate recommendations based on budget and duration
+    const recommendations = generateRecommendations(destInfo, dailyBudget, durationDays);
+
+    return {
+        destination: destination,
+        budget: budget,
+        duration: duration,
+        recommendations: recommendations
+    };
 }
 
-// Example usage
-const userDestination = "Paris";
-const userBudget = 2500;
-const travelPlan = generateTravelPlan(userDestination, userBudget);
-console.log(travelPlan);
+function getDurationInDays(duration) {
+    const durationMap = {
+        'weekend': 2,
+        'week': 7,
+        'fortnight': 14,
+        'month': 30
+    };
+    return durationMap[duration] || 7;
+}
+
+function generateRecommendations(destInfo, dailyBudget, durationDays) {
+    let recommendations = [];
+    const { attractions, accommodations, transportationCosts } = destInfo;
+
+    // Calculate accommodation recommendations
+    const accommodation = findSuitableAccommodation(accommodations, dailyBudget);
+    if (accommodation) {
+        recommendations.push({
+            name: `Stay at ${accommodation.name}`,
+            description: `Recommended accommodation within your budget`,
+            cost: accommodation.costPerNight * durationDays
+        });
+    }
+
+    // Calculate attractions recommendations
+    const suitableAttractions = attractions.filter(att => att.cost <= dailyBudget * 0.3);
+    suitableAttractions.forEach(att => {
+        recommendations.push({
+            name: att.name,
+            description: `Popular attraction, approximately ${att.duration} hours`,
+            cost: att.cost
+        });
+    });
+
+    // Add transportation recommendation
+    const transport = recommendTransportation(transportationCosts, dailyBudget);
+    recommendations.push({
+        name: `Transportation: ${transport.type}`,
+        description: `Daily transportation option`,
+        cost: transport.cost * durationDays
+    });
+
+    return recommendations;
+}
+
+function findSuitableAccommodation(accommodations, dailyBudget) {
+    return accommodations.find(acc => acc.costPerNight <= dailyBudget * 0.5);
+}
+
+function recommendTransportation(transportationCosts, dailyBudget) {
+    if (dailyBudget >= transportationCosts.rental) {
+        return { type: 'Car Rental', cost: transportationCosts.rental };
+    } else if (dailyBudget >= transportationCosts.taxi) {
+        return { type: 'Taxi', cost: transportationCosts.taxi };
+    } else {
+        return { type: 'Public Transportation', cost: transportationCosts.public };
+    }
+}
