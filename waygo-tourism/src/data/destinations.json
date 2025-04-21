@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Paris",
+    "budgetRange": {
+      "min": 1000,
+      "max": 3000
+    },
+    "recommendedActivities": [
+      "Visit the Eiffel Tower",
+      "Explore the Louvre Museum",
+      "Stroll along the Seine River",
+      "Enjoy a meal at a local bistro"
+    ]
+  },
+  {
+    "name": "Tokyo",
+    "budgetRange": {
+      "min": 1200,
+      "max": 3500
+    },
+    "recommendedActivities": [
+      "Experience the Shibuya Crossing",
+      "Visit the Tokyo Tower",
+      "Explore the historic Asakusa district",
+      "Try authentic sushi at a local restaurant"
+    ]
+  },
+  {
+    "name": "New York",
+    "budgetRange": {
+      "min": 1500,
+      "max": 4000
+    },
+    "recommendedActivities": [
+      "See a Broadway show",
+      "Visit Central Park",
+      "Explore the Metropolitan Museum of Art",
+      "Walk across the Brooklyn Bridge"
+    ]
+  },
+  {
+    "name": "Sydney",
+    "budgetRange": {
+      "min": 1300,
+      "max": 3200
+    },
+    "recommendedActivities": [
+      "Visit the Sydney Opera House",
+      "Relax at Bondi Beach",
+      "Explore the Royal Botanic Garden",
+      "Take a ferry to Manly"
+    ]
+  },
+  {
+    "name": "Rome",
+    "budgetRange": {
+      "min": 900,
+      "max": 2500
+    },
+    "recommendedActivities": [
+      "Visit the Colosseum",
+      "Explore the Vatican City",
+      "Stroll through the Roman Forum",
+      "Enjoy gelato at a local shop"
+    ]
+  }
+]
